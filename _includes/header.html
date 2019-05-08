@@ -1,5 +1,13 @@
 <header class="site-header" role="banner">
 
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+                  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+                          });
+    </script>
+    <script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
   <div class="wrapper">
     {% assign default_paths = site.pages | map: "path" %}
     {% assign page_paths = site.header_pages | default: default_paths %}
