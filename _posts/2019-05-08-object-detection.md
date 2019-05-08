@@ -1,24 +1,22 @@
-# Object Detection
 
-- [Object Detection](#object-detection)
-  - [发展](#%E5%8F%91%E5%B1%95)
-  - [R-CNN](#r-cnn)
-  - [SPP Net](#spp-net)
-  - [Fast R-CNN](#fast-r-cnn)
-  - [Faster R-CNN](#faster-r-cnn)
-  - [YoloV1](#yolov1)
-  - [SSD(Single Shot MultiBox Detector)](#ssdsingle-shot-multibox-detector)
-  - [R-FCN](#r-fcn)
-  - [FPN(Feature Pyramid Networks)](#fpnfeature-pyramid-networks)
-  - [YoloV2](#yolov2)
-  - [RetinaNet](#retinanet)
-    - [Focal loss](#focal-loss)
-  - [Mask R-CNN](#mask-r-cnn)
-    - [ROI Align](#roi-align)
-    - [损失函数](#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0)
-  - [YoloV3](#yolov3)
-  - [RFBNet(Receptive Fields Block)](#rfbnetreceptive-fields-block)
-  - [DSFD(Dual Shot Face Detector)](#dsfddual-shot-face-detector)
+- [发展](#%E5%8F%91%E5%B1%95)
+- [R-CNN](#r-cnn)
+- [SPP Net](#spp-net)
+- [Fast R-CNN](#fast-r-cnn)
+- [Faster R-CNN](#faster-r-cnn)
+- [YoloV1](#yolov1)
+- [SSD(Single Shot MultiBox Detector)](#ssdsingle-shot-multibox-detector)
+- [R-FCN](#r-fcn)
+- [FPN(Feature Pyramid Networks)](#fpnfeature-pyramid-networks)
+- [YoloV2](#yolov2)
+- [RetinaNet](#retinanet)
+  - [Focal loss](#focal-loss)
+- [Mask R-CNN](#mask-r-cnn)
+  - [ROI Align](#roi-align)
+  - [损失函数](#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0)
+- [YoloV3](#yolov3)
+- [RFBNet(Receptive Fields Block)](#rfbnetreceptive-fields-block)
+- [DSFD(Dual Shot Face Detector)](#dsfddual-shot-face-detector)
 
 ## 发展
 物体检测（Object Detection）的任务是找出图像或视频中的感兴趣目标，同时实现输出检测目标的位置和类别，是机器视觉领域的核心问题之一，学术界已有将近二十年的研究历史。随着深度学习技术的火热发展，目标检测算法也从基于手工特征的传统算法转向了基于深度神经网络的检测技术。从最初2013年提出的R-CNN、OverFeat，到后面的 Fast/Faster R-CNN、SSD、YOLO 系列，以及Mask R-CNN、RefineDet、RFBNet等。短短不到五年时间，基于深度学习的目标检测技术，在网络结构上，从 two stage 到 one stage，从 bottom-up only 到 Top-Down，从 single scale network 到 feature pyramid network，从面向 PC 端到面向移动端，都涌现出许多好的算法技术，这些算法在开放目标检测数据集上的检测效果和性能都很出色。
@@ -172,6 +170,7 @@ RetinaNet结合了FPN、ResNet、FocalLoss，网络结构如下：
 
 ### Focal loss
 Focal Loss的作用是为了解决类别不平衡问题（背景类比较多），因此只要该模型能够很好地检测背景，就可以减少其损失并重新增强对目标类的训练。下面公式和图为CE和FL的对比：
+
 $$
 \begin{aligned}
 CE(p_t) &= -\log(p_t) \\
@@ -216,7 +215,9 @@ Mask R-CNN的想法非常简单，是Faster R-CNN的自然推广。但是RoI Poo
 
 ### 损失函数
 Mask R-CNN的损失函数为：
+
 $$ 𝐿=𝐿_{cls}+𝐿_{𝑏𝑜𝑥}+𝐿_{𝑚𝑎𝑠𝑘} $$
+
 其中$𝐿_{𝑐𝑙𝑠}$和$𝐿_{𝑏𝑜𝑥}$是分类和Bounding box回归的损失，这和Faster R-CNN一样，这里增加了一个$𝐿_{𝑚𝑎𝑠𝑘}$。对于每个RoI，mask分支会输出$𝐾𝑚^2$个值，分别代表K个分类每一个像素的mask。注意这里对于每个候选区域，都会输出$K$个$𝑚^2$的Mask矩阵，这样每类物体的mask是独立预测的。在计算loss的时候如果物体是第$k$类物体，那么只有对于它的那$𝑚^2$个mask是计入loss的。
 
 
