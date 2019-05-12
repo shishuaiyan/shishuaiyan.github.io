@@ -1,3 +1,18 @@
+---
+layout:     post
+title:      "归一化的一些图示"
+data: 2019-05-08 12:34:56
+permalink:  normalization.html
+categories: 深度学习
+tags: normalization
+excerpt: 包括BN、LN、IN...
+mathjax: true
+---
+
+* content
+{:toc}
+
+
 ![gn](/img/gn.png)
 
 从上图可以看到，其实各个方式只是在不同维度、粒度上进行变化。假设输入的shape为(N, C, H*W)，则有：

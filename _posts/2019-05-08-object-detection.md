@@ -1,22 +1,17 @@
+---
+layout:     post
+title:      "目标检测经典方法"
+data: 2019-05-08 12:34:56
+permalink:  object_dection.html
+categories: 深度学习
+tags: object_dection
+excerpt: object_dection的经典方法整理
+mathjax: true
+---
 
-- [发展](#%E5%8F%91%E5%B1%95)
-- [R-CNN](#r-cnn)
-- [SPP Net](#spp-net)
-- [Fast R-CNN](#fast-r-cnn)
-- [Faster R-CNN](#faster-r-cnn)
-- [YoloV1](#yolov1)
-- [SSD(Single Shot MultiBox Detector)](#ssdsingle-shot-multibox-detector)
-- [R-FCN](#r-fcn)
-- [FPN(Feature Pyramid Networks)](#fpnfeature-pyramid-networks)
-- [YoloV2](#yolov2)
-- [RetinaNet](#retinanet)
-  - [Focal loss](#focal-loss)
-- [Mask R-CNN](#mask-r-cnn)
-  - [ROI Align](#roi-align)
-  - [损失函数](#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0)
-- [YoloV3](#yolov3)
-- [RFBNet(Receptive Fields Block)](#rfbnetreceptive-fields-block)
-- [DSFD(Dual Shot Face Detector)](#dsfddual-shot-face-detector)
+* content
+{:toc}
+
 
 ## 发展
 物体检测（Object Detection）的任务是找出图像或视频中的感兴趣目标，同时实现输出检测目标的位置和类别，是机器视觉领域的核心问题之一，学术界已有将近二十年的研究历史。随着深度学习技术的火热发展，目标检测算法也从基于手工特征的传统算法转向了基于深度神经网络的检测技术。从最初2013年提出的R-CNN、OverFeat，到后面的 Fast/Faster R-CNN、SSD、YOLO 系列，以及Mask R-CNN、RefineDet、RFBNet等。短短不到五年时间，基于深度学习的目标检测技术，在网络结构上，从 two stage 到 one stage，从 bottom-up only 到 Top-Down，从 single scale network 到 feature pyramid network，从面向 PC 端到面向移动端，都涌现出许多好的算法技术，这些算法在开放目标检测数据集上的检测效果和性能都很出色。

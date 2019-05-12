@@ -1,3 +1,18 @@
+---
+layout:     post
+title:      "深度学习优化器"
+data: 2019-05-08 12:34:56
+permalink:  optimizer.html
+categories: 深度学习
+tags: optimizer
+excerpt: 常用优化器整理
+mathjax: true
+---
+
+* content
+{:toc}
+
+
 ## BGD
 
 $$\theta = \theta - \eta \cdot \nabla_{\theta}J(\theta)$$
@@ -32,7 +47,7 @@ $$
 
 超参数：$\gamma$一般选择0.9
 
-缺点：这种情况相当于小球从山上滚下来时是在盲目地沿着坡滚，如果它能具备一些先知，例如快要上坡时，就知道需要减速了的话，适应性会更好。
+缺点：这种情况相当于小球从山上滚下来时是在盲目地沿着坡滚，如果它能具备一些先知，例如快要上坡时，就知道需要减速了的话，适应性会更好
 
 ## Nesterov(NAG)
 

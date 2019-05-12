@@ -1,24 +1,63 @@
-title: Luffy的万里阳光号 
-author: Fei Wang 
-email: fei.comm@icloud.com 
-description: > # this means to ignore newlines until "baseurl:"
-  快来寻找one piece吧
-#twitter_username: jekyllrb
-github_username: Fei-Wang 
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
 
-# Minima date format
-# refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
-minima:
-  date_format: "%b %-d, %Y"
+# Site settings
+title: 我是要成为海贼王的男人!!!
+small-title: 海贼王，我当定了！
+brief-intro: 蒙奇·D·路飞
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://Fei-Wang.github.io" # the base hostname & protocol for your site
 
-# If you want to link only specific pages in your header, uncomment
-# this and add the path to the pages in order as they should show up
-#header_pages:
-# - about.html
+permalink: /:year/:month/:day/:title/
+
+# other links
+github_username:  Fei-Wang
+email: fei.comm@icloud.com
+dribbble_username:
+
+description_footer: 本站记录航海过程中的点点滴滴
+
+# comments
+# two ways to comment, only choose one, and use your own short name
+# 两种评论插件，选一个就好了，使用自己的 short_name
+duoshuo_shortname: #hygblog
+disqus_shortname: Fei Wang
+
+# statistic analysis 统计代码
+# 百度统计 id，将统计代码替换为自己的百度统计id，即
+# hm.src = "//hm.baidu.com/hm.js?xxxxxxxxxxxx";
+# xxxxx字符串
+baidu_tongji_id: 178e5b293586de71389691b6bd58e56e
+google_analytics_id: UA-140003441-1 # google 分析追踪id
 
 # Build settings
 markdown: kramdown
-theme: minima 
-exclude:
-  - Gemfile
-  - Gemfile.lock
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# port
+# port: 1234
+
+# url
+category_dir: category/
+tag_dir: tag/
+
+# excerpt
+excerpt_separator: <!--more-->
+
+# paginate
+gems: [jekyll-paginate]
+paginate: 6
+
+
+# 搜索服务
+#algolia:
+#  application_id: '36883FPR2D'
+#  index_name: '36883FPR2D'
+#  search_only_api_key: '2d40767987f704b3b04b9efce7ff49c8'
