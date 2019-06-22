@@ -3,3 +3,5 @@
 Gemfile.lock
 _site
 *.gem
+，DS_Store
+
