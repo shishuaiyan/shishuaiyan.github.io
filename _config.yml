@@ -14,8 +14,8 @@ url: "https://shishuaiyan.github.io" # the base hostname & protocol for your sit
 
 permalink: /:year/:month/:day/:title/
 
-# other links
-github_username:  shishuai.yan
+# other links   底端链接
+github_username:  shishuaiyan
 email: yan_ss@qq.com
 dribbble_username:
 
