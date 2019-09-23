@@ -6,17 +6,17 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: 我是要成为海贼王的男人!!!
-small-title: 海贼王，我当定了！
-brief-intro: 蒙奇·D·路飞
+title: Code Can Do
+small-title: 程序猿的自我修养
+brief-intro: Weilit
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://Fei-Wang.github.io" # the base hostname & protocol for your site
+url: "https://shishuaiyan.github.io" # the base hostname & protocol for your site
 
 permalink: /:year/:month/:day/:title/
 
 # other links
-github_username:  Fei-Wang
-email: fei.comm@icloud.com
+github_username:  shishuai.yan
+email: yan_ss@qq.com
 dribbble_username:
 
 description_footer: 本站记录航海过程中的点点滴滴
@@ -25,7 +25,7 @@ description_footer: 本站记录航海过程中的点点滴滴
 # two ways to comment, only choose one, and use your own short name
 # 两种评论插件，选一个就好了，使用自己的 short_name
 duoshuo_shortname: #hygblog
-disqus_shortname: Fei Wang
+disqus_shortname: shishuai yan
 
 # statistic analysis 统计代码
 # 百度统计 id，将统计代码替换为自己的百度统计id，即
