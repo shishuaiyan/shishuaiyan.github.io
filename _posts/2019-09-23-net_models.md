@@ -50,7 +50,7 @@ $$y=F(x)+Wx$$
 ![ResNet结构图](/img/resnet结构图.png)
 
 ### ResNet-V2
-![](/img/ResNetV2_.png)  
+![](/img/resnetV2.PNG)  
 fig1. resnetV1（左） VS resnetV2（右）(residual block区别)  
 weight -> $W$ -> conv2D  
 如图所示，ResNetV1与ResNetV2最大的区别在于残差块中BN/activation的位置：
