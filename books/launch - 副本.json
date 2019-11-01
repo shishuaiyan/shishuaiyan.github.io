@@ -1,0 +1,37 @@
+{ 
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Bash on Windows Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/mnt/e/code/wsl_code/the_force/tf_unit/unit_test",  //被调试的可执行文件
+            "args": [],
+            "stopAtEntry": true,   // 是否在进入主程序的第一行停顿
+            "miDebuggerArgs": "",
+            "cwd": "/mnt/e/code/wsl_code/the_force/tf_format/", //可执行文件的运行目录  在"cwd"目录下执行"program"
+            "environment": [],
+            "externalConsole": false,
+            "sourceFileMap": {  //源文件map
+                //"/mnt/c/": "C:\\",
+                //"/mnt/e/": "E:\\",   // 代码在e盘中，需要加这一句
+                "/mnt/e/code/wsl_code/the_force": "E:\\code\\wsl_code\\the_force"
+            },
+            "pipeTransport": {
+                "debuggerPath": "/usr/bin/gdb", // 选择调试器，使用gdb调试（可通过whereis gdb确定位置，需安装apt-get install build-essential gdb）
+                "pipeProgram": "${env:windir}\\system32\\bash.exe",
+                "pipeArgs": [
+                    "-c"
+                ],
+                "pipeCwd": ""
+            },
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+    ]
+}

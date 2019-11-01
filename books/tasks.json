@@ -1,0 +1,44 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "linux": {
+        "options": {
+          "shell": {
+            "executable": "bash",
+            "args": ["-c"]
+          }
+        }
+    },
+    "windows": {
+        "options": {
+          "shell": {
+            "executable": "bash"
+          }
+        }
+    },
+    "tasks": [
+        {
+            "label": "format_cmake",
+            "type": "shell",
+            "command": "export THE_FORCE_SOURCE_PATH=/mnt/e/code/wsl_code/the_force && cd tf_format/build && cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_TEST=ON .."
+        },
+        {
+            "label": "format_make",
+            "type": "shell",
+            "command": "cd tf_format/build && make"
+        },
+        {
+            "label": "build_format",
+            "type": "shell",
+            "dependsOn": [
+                "format_cmake",
+                "format_make"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
