@@ -2,7 +2,7 @@
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "2.0.0",
-    "linux": {
+    "linux": {          // linux操作系统特定的属性
         "options": {
           "shell": {
             "executable": "bash",
@@ -17,11 +17,11 @@
           }
         }
     },
-    "tasks": [
+    "tasks": [  // 需要执行的任务
         {
-            "label": "format_cmake",
-            "type": "shell",
-            "command": "export THE_FORCE_SOURCE_PATH=/mnt/e/code/wsl_code/the_force && cd tf_format/build && cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_TEST=ON .."
+            "label": "format_cmake",    // 任务标签，需要和下面的dependsOn中对应
+            "type": "shell",            // 任务类型，可以是shell(将命令解释为shell命令)或者process(将命令解释为要执行的过程)
+            "command": "export THE_FORCE_SOURCE_PATH=/mnt/e/code/wsl_code/the_force && cd tf_format/build && cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_TEST=ON .." // 要执行的实际命令，命令之间用&&分隔(the force需要配置环境变量；到制定文件夹执行cmake并打开debug)
         },
         {
             "label": "format_make",
@@ -31,11 +31,12 @@
         {
             "label": "build_format",
             "type": "shell",
-            "dependsOn": [
+            "dependsOrder": "sequence",     // 制定任务执行顺序，format_cmake -> format_make -> build_format
+            "dependsOn": [      // 将并行执行dependsOn中的多个任务
                 "format_cmake",
                 "format_make"
             ],
-            "group": {
+            "group": {          // 定义任务所示分组，默认分组定义如下：  定义了默认组之后，可通过快捷键Ctrl+Shift+B来执行该分组
                 "kind": "build",
                 "isDefault": true
             }

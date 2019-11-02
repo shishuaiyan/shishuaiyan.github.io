@@ -5,13 +5,13 @@
             "name": "(gdb) Bash on Windows Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/tf_format/unit_test",  //被调试的可执行文件
+            "program": "${workspaceFolder}/tf_format/unit_test",  //被调试的可执行文件，其中workspaceFolder变量代表通过vscode打开文件夹的目录，或者说.vscode文件夹所在的目录，这里是/mnt/e/code/wsl_code/the_force
             "args": [],
             
-            "linux": {
+            "linux": {  // 若vscode是在linux环境下打开，则执行这里的配置
                 "stopAtEntry": false,   // 是否在进入主程序的第一行停顿
-                "MIMode": "gdb",
-                "miDebuggerPath":"/usr/bin/gdb",
+                "MIMode": "gdb",        // 选择调试器
+                "miDebuggerPath":"/usr/bin/gdb",    // 调试器位置
                 "miDebuggerArgs": "",
                 "environment": [],
                 // "sourceFileMap": {  //源文件map
@@ -19,8 +19,8 @@
                 //     //"/mnt/e/code/wsl_code/the_force": "E:\\code\\wsl_code\\the_force"
                 // },
                 "cwd": "${workspaceFolder}/tf_format/", //可执行文件的运行目录  在"cwd"目录下执行"program"
-                "externalConsole": false,
-            },            
-        },
+                "externalConsole": false
+            }            
+        }
     ]
 }
