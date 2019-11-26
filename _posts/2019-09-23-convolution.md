@@ -48,7 +48,7 @@ mathjax: true
 > [CNN 中千奇百怪的卷积方式大汇总](https://www.leiphone.com/news/201709/AzBc9Sg44fs57hyY.html)  
 > [CNN中几个新的卷积方式](https://zhuanlan.zhihu.com/p/54033473)
 
-![空洞卷积](/img/空洞卷积.gif)
+![空洞卷积](../img/空洞卷积.gif)
 **思想**：
 - 将卷积核进行“扩张”（拉大间距产生空洞，产生的空洞weight以0值填充，有一个扩张率参数d，可理解成有效卷积点间的距离）  
 
@@ -56,7 +56,7 @@ mathjax: true
 - 在不增加卷积核参数量的前提下或者不进行下采样的条件下有效扩大感受野，在图像需要全局信息的问题中，能够很好的应用dilated conv
 
 ### 深度可分离卷积(Depthwise separable convolution)
-![深度可分离卷积](/img/深度可分离卷积.png)
+![深度可分离卷积](../img/深度可分离卷积.png)
 **思想**：
 - 先逐通道地(depthwise)对输入数据体空间域做卷积，再沿着通道方向做1*1卷积进行通道融合    
 
@@ -71,7 +71,7 @@ mathjax: true
 - [MobileNet](###MobileNet)
 
 ### 分组卷积
-![分组卷积](/img/分组卷积.png)    
+![分组卷积](../img/分组卷积.png)    
 **思想**：
 - 将输入数据体沿通道维度分成多组，对每组分别进行卷积，然后再将各组卷积的输出连接(concatenate)起来
 

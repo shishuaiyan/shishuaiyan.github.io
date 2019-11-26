@@ -13,7 +13,7 @@ mathjax: true
 {:toc}
 
 
-![gn](/img/gn.png)
+![gn](../img/gn.png)
 
 从上图可以看到，其实各个方式只是在不同维度、粒度上进行变化。假设输入的shape为(N, C, H*W)，则有：
 
@@ -24,7 +24,7 @@ mathjax: true
   
 自适应归一化SN(Switchable Norm)如下：
 
-![sn](/img/sn.png)
+![sn](../img/sn.png)
 
 效果图如下：
-![norm](/img/norm.png)
+![norm](../img/norm.png)
