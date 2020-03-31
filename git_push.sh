@@ -2,5 +2,16 @@
 
 git pull
 git add .
-git commit -m "update"
-git push
+git status
+read -p "Commit? [Y]/N: " flag
+case $flag in
+    [yY]|"$null")
+        echo "yes"
+        git commit -m "update"
+        git push
+        ;;
+    *)
+        echo "no"
+        git reset HEAD
+esac
+git status
