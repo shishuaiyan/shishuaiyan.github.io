@@ -100,6 +100,7 @@ $2=[file2]
 # getopt
 - `getopt`是一个外部命令，不是bash内置命令，Linux发行版通常会自带
 - `getopt`支持短选项和长选项
+- `getopt`命令解析选项后会添加`"--"`作为分隔符
 - 老版本的getopt问题较多，增强版getopt比较好用，执行命令`getopt -T; echo $?`，如果输出4，则代表是增强版的
 - 如果短选项带argument且参数可选时，argument必须紧贴选项，如`-carg` 而不能是`-c arg`
 - 如果长选项带argument且参数可选时，argument和选项之间用“=”，如`--clong=arg`而不能是`--clong arg`
@@ -121,8 +122,6 @@ if [ $? != 0 ]; then
     exit 1
 fi
 
-eval set "1 2 3"
-echo parameters=[$@]
 echo ARGS=[$ARGS]
 # eval set "${ARGS}" 将变量"ARGS"中的值最为当前shell脚本的输入分配至位置参数（$1,$2,...)
 # 但对于"-"开头的参数会被当做选项来解析，需要加"--"
@@ -158,7 +157,7 @@ do
             ;;
         --)
             shift
-            break
+            break       # 这里跳出while循环
             ;;
         *)
             echo "Internal error!"
