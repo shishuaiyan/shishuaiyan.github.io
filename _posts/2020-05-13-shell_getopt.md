@@ -237,3 +237,143 @@ remaining parameters=[2 file1 file2]
 $1=[2]
 $2=[file1]
 ```
+
+# 使用示例
+指定目录，遍历目录下的`cif`文件，并依次执行`test_exe`.
+```bash
+#!/bin/bash
+
+COLOR_ERROR="\e[38;5;198mError:"
+COLOR_NONE="\e[0m"
+COLOR_WARN="\e[1;33;198mWaning:"
+COLOR_SUCC="\e[92mSuccess:"
+
+COLOR_GREEN='\e[1;32m' #绿
+COLOR_RED='\E[1;31m'  #红
+COLOR_YELLOW='\E[1;33m' #黄
+COLOR_BLUE='\E[1;34m'  #蓝
+
+echo original parameters=[$@]
+
+# -o或--options选项后面是可接受的短选项，如ab:c::，表示可接受的短选项为-a -b -c，
+# 其中-a选项不接参数，-b选项后必须接参数，-c选项的参数为可选的
+# -l或--long选项后面是可接受的长选项，用逗号分开，冒号的意义同短选项。
+# -n选项后接选项解析错误时提示的脚本名字
+# getopt是外部命令，需要使用$()或``实现命令替换
+ARGS=$(getopt -o d:f:e: --long files_dir:,single_file_path:,extension:,func:,exe_path: -n "$0" -- "$@")
+if [ $? != 0 ]; then
+    echo "Terminating..."
+    exit 1
+fi
+
+echo ARGS=[$ARGS]
+# eval set "${ARGS}" 将变量"ARGS"中的值最为当前shell脚本的输入分配至位置参数（$1,$2,...)
+# 但对于"-"开头的参数会被当做选项来解析，需要加"--"
+# 举一个例子比较好理解：
+# 我们要创建一个名字为 "-f"的目录你会怎么办？
+# mkdir -f #不成功，因为-f会被mkdir当作选项来解析，这时就可以使用
+# mkdir -- -f 这样-f就不会被作为选项。
+eval set -- "${ARGS}"
+echo formatted parameters=[$@]
+
+while true
+do
+    case "$1" in
+        -d|--files_dir) 
+            echo "Option -d/--files_dir, argument $2";
+            files_dir=$2
+            if [ ! ${files_dir: -1} == '/' ];then       # 获取最后一个字符并判断
+                files_dir="${files_dir}/"
+            fi
+            shift 2
+            ;;
+        -f|--single_file_path)
+            echo "Option -f/--single_file_path, argument $2";
+            single_file_path=$2
+            shift 2
+            ;;
+        --func)
+            echo "Option --func, argument $2";
+            func=$2
+            shift 2
+            ;;
+        --exe_path)
+            echo "Option --exe_path, argument $2";
+            exe_path=$2
+            shift 2
+            ;;
+        -e|--extension)
+            echo "Option -e/--extension, argument $2";
+            extension=$2
+            shift 2
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            echo "Internal error!"
+            exit 1
+            ;;
+    esac
+done
+
+#处理剩余的参数
+echo remaining parameters=[$@]
+echo \$1=[$1]
+echo \$2=[$2]
+echo
+
+if [ -z "$extension" ];then extension="cif";fi
+
+if [ -z "$files_dir" ] && [ -z $single_file_path ];then 
+    echo -e "${COLOR_ERROR} Please assign the test file or dir by --single_file_path/--files_dir ${COLOR_NONE}"
+    exit 1
+fi
+
+if $exe_path;then 
+    if [ -f "./test_exe" ];then
+        exe_path="./test_exe"
+    else
+        echo -e "${COLOR_ERROR} Please assign the path to test_exe ${COLOR_NONE}"
+        exit 1
+    fi
+    else
+        if [ ! -f ${exe_path} ];then
+            echo -e "${COLOR_ERROR} ${exe_path} not exit! ${COLOR_NONE}"
+            exit 1
+        fi
+fi
+
+if [ -z "$func" ];then      # 判断字符串"$func"是否为空，是为真
+    echo -e "${COLOR_ERROR} Please assign the func to test_exe ${COLOR_NONE}"
+    exit 1
+fi
+
+function run_test_exe() {
+    local file_name=$1
+    local cur_extension=${file_name: 0-3: 3}
+    # 1. []中condition两边需要有空格
+    # 2. =等效于==，且两边需要有空格
+    # 3. "$cur_extension"x最后的x，这是特意安排的，因为当$cur_extension为空的时候，上面的表达式就变成了x = "${extension}"x, 显然是不相等的。而如果没有这个x就会报错
+    if [ "${cur_extension}"x == "${extension}"x ];then
+        # echo ">>>>>> run test_exe -func ${func} -im "${files_dir}${file_name}""
+        echo -e "${COLOR_GREEN}>>>${COLOR_NONE} ${func} ${COLOR_GREEN}${file_name}${COLOR_NONE} "
+        ${exe_path} -func ${func} -im "${files_dir}/${file_name}"
+        echo
+    fi
+}
+
+if [ -n "${files_dir}" ] && [ -d "${files_dir}" ];then
+    file_names=$(ls "$files_dir")
+    for file_name in ${file_names}
+    do
+        run_test_exe ${file_name}
+    done
+fi
+
+if [ -f $single_file_path ];then
+    run_test_exe ${single_file_path}
+fi
+
+```
