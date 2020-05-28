@@ -12,8 +12,10 @@ excerpt: C/C++/Python高性能编程的第一步：性能评估(profile)总结
 {:toc}
 
 # Python
+> reference: [Python优化第一步: 性能分析实践](https://zhuanlan.zhihu.com/p/24495603)
 
 # C/C++
+> reference: [linux下的profile工具GNU gprof和Valgrind](https://blog.csdn.net/clarstyle/article/details/41747817)
 
 ## Valgrind
 > reference: [Valgrind安装和简单使用介绍](https://segmentfault.com/a/1190000017465212)
@@ -69,3 +71,51 @@ linux平台下可直接`apt get kcachegring`下载使用，注意：该工具基
 windows平台可下载[QCacheGrind](https://sourceforge.net/projects/qcachegrindwin/files/latest/download)解压使用。
 
 ## 
+
+# profile可视化
+## Graphviz
+> [官网](http://graphviz.org/)
+
+
+`Graphviz`是一个很好用的绘图工具，linux/windows下都可快速使用，通过简单的语句编写`.dot`文本并生成图片，这里是为了生成性能分析的流程图。
+linux下可直接通过`apt`命令安装：
+```bash
+apt install graphviz
+# check
+dot -V
+# use
+dot -Tpng -o result.png <path_to_dot_file>
+```
+上述命令会根据传入的dot文件在当前目录下生成名为`result.png`的图片。
+
+## gprof2dot
+> [git项目地址](https://github.com/jrfonseca/gprof2dot)
+
+对于valgrind, cProfiler等工具生成的结果文件，还需要使用`gprof2dot`工具将log转换为dot文件，之后才能使用`graphviz`工具生成图片。
+```bash
+# gprof2dot是一个Python库，支持py2.7以及python3
+conda activate
+# install
+pip install gprof2dot
+# check
+gprof2dot -h
+# use 注意，对于不同工具生成的log文件，需要制定不同的format参数
+gprof2dot -f pstats <log_file> | dot -Tpng -o result.png    # python cProfile/profile
+gprof2dot -f callgrind <log_file> | dot -Tpng -o result.png    # c++ valgrind
+```
+
+# C++优化方法
+## 并行计算
+1. 并行库
+2. SIMD指令集，例如：128位的寄存器可以同时存放4个32位的浮点数，因此可同时处理4个数据
+
+## 内存优化
+1. 内存块频繁的申请与释放耗时比较大，必要情况下可以自己实现内存管理。对于内存大小比较相近，频繁申请时可以自己缓冲内存列表，类似 Look aside list
+2. 内存对齐
+3. 空间换时间：能用到的中间数据存储起来；for循环展开等
+
+## 数值优化
+1. 考虑使用些基本代数库
+2. 少用乘法/除法，多用加法
+3. 计算n的10次方以下时不要使用std::pow()
+4. 使用广播机制将一个数乘/加到矩阵的所有元素上时将这个数提前计算出来或者放到矩阵的前面
