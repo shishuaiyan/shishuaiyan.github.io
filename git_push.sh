@@ -1,7 +1,9 @@
 #!/bin/bash
 
-echo ">>> git pull"
-git pull
+# echo ">>> git pull origin master"
+# git pull origin master
+echo ">>> git pull gitee master"
+git pull gitee master
 echo ">>> git add ."
 git add .
 echo ">>> git status"
@@ -12,8 +14,10 @@ case $flag in
         echo "yes"
         echo ">>> git commit -m \"update\""
         git commit -m "update"
-        echo ">>> git push"
-        git push
+        echo ">>> git push origin master"
+        git push origin master
+        echo ">>> git push gitee master"
+        git push gitee master
         ;;
     *)
         echo "no"
