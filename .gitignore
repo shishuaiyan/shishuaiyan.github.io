@@ -3,5 +3,5 @@
 Gemfile.lock
 _site
 *.gem
-，DS_Store
-
+DS_Store
+.vscode
