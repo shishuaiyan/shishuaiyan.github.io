@@ -119,3 +119,10 @@ gprof2dot -f callgrind <log_file> | dot -Tpng -o result.png    # c++ valgrind
 2. 少用乘法/除法，多用加法
 3. 计算n的10次方以下时不要使用std::pow()
 4. 使用广播机制将一个数乘/加到矩阵的所有元素上时将这个数提前计算出来或者放到矩阵的前面
+
+例如： 
+```c++
+// 除法运算时，当2**n作为除数的情况下，可用如下优化
+uint16_t i = idx >> 3;      // 等效于：i = idx // 8     取整
+uint16_t bi = idx & 0x0007; // 等效于：bi = idx % 8     取余
+```
