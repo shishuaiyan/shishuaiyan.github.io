@@ -10,7 +10,7 @@ title: Code Can Do
 small-title: 程序猿的自我修养
 brief-intro: Weilit
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://shishuaiyan.github.io" # the base hostname & protocol for your site
+url: "https://shishuaiyan.github.io/about" # the base hostname & protocol for your site
 
 permalink: /:year/:month/:day/:title/
 
