@@ -10,6 +10,43 @@ excerpt: 控制中的旋转矩阵相关知识整理
 * content
   {:toc}
 
+
+
+# 一、向量和标量
+
+## 1. 标量
+
+在介绍向量之前，有必要介绍一下标量(scalar)，标量是一个数字，只有大小，没有方向(不过有正负)。例如温度，重量等。
+
+## 2. 向量
+
+向量(vector)是多个数字组成的列表。$n$个有次序的数所$x_1,x_2,...,x_n$组成的数组列表称为$n$维向量。
+向量可以有两种方式去描述：
+
+1. 空间中的一个点，而有次序的数字可以确定点在空间中的位置；
+2. 将向量描述为有**大小**和**方向**的一个量，例如一辆正在行驶的自动驾驶车辆的速度为正东方向$50km/h$。这时候向量就是一个从坐标原点指向终点(由有次序的数字确定)的一个矢量。
+
+如下向量$\begin{bmatrix}4&3\end{bmatrix}^T$:
+
+![](../img/coordinate transformation/vector.webp)
+
+## 3. 线性空间
+
+### 一些定义
+
+- 若干**同维数**的**列向量**或**行向量**所组成的集合叫做**向量组**
+
+- 设$V$为一向量组，如果$V$非空，且$V$对于向量的加法及数乘两种运算封闭，那么就称$V$为**向量空间**
+  - 所谓封闭，是指在$V$中向量进行数乘和加减，其结果依然在$V$中：
+    - 若$a\in V,b\in V$则$a+b\in V$
+    - 若$a\in V,k\in \mathbb{R}$则$ka\in V$
+
+## 4. 维数，基和坐标
+
+非对称房地产房地产发电厂房地产房地产无忌口忌口忌口忌口忌口忌口忌口忌口忌口忌口忌口忌口忌口忌口忌口                                                                                                                                                                                                                                                                  
+
+
+
 # 1 基础知识
 
 ## 1.1 左右手坐标系
@@ -25,7 +62,7 @@ excerpt: 控制中的旋转矩阵相关知识整理
 
 - $^AP_a$: 点$a$在坐标系$A$中的位姿（矩阵）
 - $^A_BR$: 坐标系$B$到坐标系$A$的旋转矩阵
-  - $^A_BR=[v_x,v_y,v_z]$ 其中列向量$v_x,v_y,v_z$分别为坐标系$B$的xyz轴单位向量在坐标系$A$中的坐标
+  - $^A_BR=[v_x,v_y,v_z]$ 其中**列向量**$v_x,v_y,v_z$分别为坐标系$B$的xyz轴单位向量在坐标系$A$中的坐标
 
 # 3 三维旋转矩阵
 
@@ -175,26 +212,37 @@ $$
 
 齐次坐标系$T=\begin{bmatrix}R&p\\0&1\end{bmatrix}=\begin{bmatrix}0&-1&0&0\\1&0&0&2\\0&0&1&0\\0&0&0&1\end{bmatrix}$ （平面运动[0, 2, 0]；ZYX内旋欧拉角[0°, 0°, 90°]）
 
-左乘（fixed frame）：
+左乘$T$(fixed frame)：
 $$
 T_{b^\prime}=TT_b
 =\begin{bmatrix}R&p\\0&1\end{bmatrix}\begin{bmatrix}R_b&p_b\\0&1\end{bmatrix}
 =\begin{bmatrix}RR_b&Rp_b+p\\0&1\end{bmatrix}
 =\begin{bmatrix}0&1&0&2\\0&0&1&2\\1&0&0&0\\0&0&0&1\end{bmatrix}
 $$
-右乘(body frame)：
+右乘$T$(body frame)：
 $$
 T_{b^\prime}=T_bT
 =\begin{bmatrix}R_b&p_b\\0&1\end{bmatrix}\begin{bmatrix}R&p\\0&1\end{bmatrix}
 =\begin{bmatrix}R_bR&Rp+p_b\\0&1\end{bmatrix}
 =\begin{bmatrix}0&0&1&0\\-1&0&0&-4\\0&-1&0&0\\0&0&0&1\end{bmatrix}
 $$
-![img](E:\code\github\shishuaiyan.github.io\img\hom_mat_multi.png)
+![img](..\img\hom_mat_multi.png)
 
 # 坐标变换
 
 这里的坐标变换指的是**将一个坐标系中的向量在其他坐标系通进行变换（描述），向量本身并没有变换，只不过对它的描述变换了**
 
-已知向量$^AP=\begin{bmatrix}p_x\\p_y\\p_z\end{bmatrix}$
+## 向量的描述
+
+一旦我们定义了一个坐标系，对于空间中某一点的位置我们就能用一个$3\times1$的列向量来表示。同样，在定义位置向量时，必须附加一个条件，表明是哪个坐标系下的。
+
+在本文中，我们用左上标来描述具体的坐标系，例如$^AP$表示向量$P$在坐标系$A$下定义的
+$$
+^AP=\begin{bmatrix}p_x\\p_y\\p_z\end{bmatrix}
+$$
+
+## 平移变换
+
+
 
 ## 旋转
